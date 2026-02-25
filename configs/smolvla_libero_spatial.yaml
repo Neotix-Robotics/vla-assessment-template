@@ -1,0 +1,58 @@
+# =============================================================================
+# SmolVLA Fine-Tuning Configuration — LIBERO-Spatial
+# =============================================================================
+#
+# Reference configuration for fine-tuning SmolVLA on LIBERO-Spatial
+# using the LeRobot framework. Designed for T4 16GB / free Colab.
+#
+# Equivalent lerobot-train command:
+#
+#   lerobot-train \
+#     --policy.type=smolvla \
+#     --policy.pretrained_path=lerobot/smolvla_base \
+#     --dataset.repo_id=HuggingFaceVLA/libero \
+#     --env.type=libero \
+#     --env.task=libero_spatial \
+#     --batch_size=8 \
+#     --steps=20000 \
+#     --eval.n_episodes=10 \
+#     --eval_freq=2000 \
+#     --policy.use_amp=true \
+#     --output_dir=outputs/train/smolvla_libero_spatial
+#
+# Candidates should adjust batch_size based on available VRAM.
+
+# Policy
+policy:
+  type: smolvla
+  pretrained_path: lerobot/smolvla_base
+  use_amp: true          # Mixed precision — critical for T4
+  train_expert_only: true  # Only train the action expert (~100M params)
+  freeze_vision_encoder: true
+  train_state_proj: true
+  chunk_size: 50           # Action chunk size (default)
+  num_steps: 10            # Flow matching denoising steps
+
+# Dataset
+dataset:
+  repo_id: HuggingFaceVLA/libero
+
+# Environment
+env:
+  type: libero
+  task: libero_spatial
+
+# Training
+batch_size: 8              # Reduce to 4 if OOM on T4
+steps: 20000               # ~2-4 hours on T4
+eval_freq: 2000            # Evaluate every 2K steps
+save_freq: 5000
+seed: 42
+
+# Evaluation (during training)
+eval:
+  n_episodes: 10           # Quick eval during training (20 for final)
+  batch_size: 1
+
+# Output
+output_dir: outputs/train/smolvla_libero_spatial
