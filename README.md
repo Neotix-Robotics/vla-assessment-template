@@ -1,11 +1,28 @@
 # Technical Assessment: Robotics Research Intern — Foundation Models & VLAs
 
+> **⚠️ IMPORTANT — READ BEFORE YOU START ⚠️**
+>
+> **Please read this entire document carefully before beginning any work.** This README contains critical information about the task requirements, environment setup, training guidelines, expected deliverables, and compute recommendations. Skipping sections may lead to wasted time, broken setups, or missing deliverables. A thorough read-through will ensure a smooth experience and help you avoid common pitfalls.
+
 ## Overview
 
 This assessment evaluates your ability to work with Vision-Language-Action (VLA) models for robotic manipulation. You will fine-tune **SmolVLA** (a 450M-parameter VLA) on the **LIBERO** simulation benchmark, evaluate it against a reference checkpoint, conduct a controlled ablation study, and produce a video of your robot performing tasks in simulation.
 
 **Time limit:** 10 days from receipt
 **Compute requirements:** Designed to run on **free GPU resources** — Google Colab (T4 16GB) or Kaggle (T4/P100 16GB). No paid compute is required.
+
+<table>
+<tr>
+<td align="center" colspan="2"><b>SmolVLA performing LIBERO spatial manipulation tasks</b></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/smolvla_task_0.gif" width="280" alt="SmolVLA performing a LIBERO spatial task — pick and place"/></td>
+<td align="center"><img src="assets/smolvla_task_3.gif" width="280" alt="SmolVLA performing a LIBERO spatial task — object rearrangement"/></td>
+</tr>
+<tr>
+<td align="center" colspan="2"><i>Fine-tuned SmolVLA controlling a robot arm to manipulate tabletop objects from language instructions</i></td>
+</tr>
+</table>
 
 ---
 
